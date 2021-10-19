@@ -330,17 +330,17 @@ func (dest *Destination) implicitWithdraw(newPath *Path) {
 		// version num. as newPaths are implicit withdrawal of old
 		// paths and when doing RouteRefresh (not EnhancedRouteRefresh)
 		// we get same paths again.
-		if newPath.GetSource().Equal(path.GetSource()) && newPath.GetNlri().PathIdentifier() == path.GetNlri().PathIdentifier() {
-			log.WithFields(log.Fields{
-				"Topic": "Table",
-				"Key":   dest.GetNlri().String(),
-				"Path":  path,
-			}).Debug("Implicit withdrawal of old path, since we have learned new path from the same peer")
-
-			found = i
-			newPath.GetNlri().SetPathLocalIdentifier(path.GetNlri().PathLocalIdentifier())
-			break
-		}
+		//if newPath.GetSource().Equal(path.GetSource()) && newPath.GetNlri().PathIdentifier() == path.GetNlri().PathIdentifier() {
+		//	log.WithFields(log.Fields{
+		//		"Topic": "Table",
+		//		"Key":   dest.GetNlri().String(),
+		//		"Path":  path,
+		//	}).Debug("Implicit withdrawal of old path, since we have learned new path from the same peer")
+		//
+		//	found = i
+		//	newPath.GetNlri().SetPathLocalIdentifier(path.GetNlri().PathLocalIdentifier())
+		//	break
+		//}
 	}
 	if found != -1 {
 		dest.knownPathList = append(dest.knownPathList[:found], dest.knownPathList[found+1:]...)
