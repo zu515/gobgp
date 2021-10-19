@@ -325,6 +325,7 @@ func (dest *Destination) implicitWithdraw(newPath *Path) {
 		if newPath.NoImplicitWithdraw() {
 			continue
 		}
+		continue
 		// Here we just check if source is same and not check if path
 		// version num. as newPaths are implicit withdrawal of old
 		// paths and when doing RouteRefresh (not EnhancedRouteRefresh)
