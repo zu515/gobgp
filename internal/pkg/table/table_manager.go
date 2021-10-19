@@ -83,7 +83,7 @@ func ProcessMessage(m *bgp.BGPMessage, peerInfo *PeerInfo, timestamp time.Time) 
 
 	pathList := make([]*Path, 0, listLen)
 	for _, nlri := range adds {
-		p := NewPath(peerInfo, nlri, false, attrs, timestamp, false)
+		p := NewPath(peerInfo, nlri, false, attrs, timestamp, true)
 		p.SetHash(hash)
 		pathList = append(pathList, p)
 	}
@@ -99,13 +99,13 @@ func ProcessMessage(m *bgp.BGPMessage, peerInfo *PeerInfo, timestamp time.Time) 
 			// this happens when a MP peer send update to gobgp
 			// However nlri is always populated because how we build the path
 			// path.info{nlri: nlri}
-			p := NewPath(peerInfo, nlri, false, reachAttrs, timestamp, false)
+			p := NewPath(peerInfo, nlri, false, reachAttrs, timestamp, true)
 			p.SetHash(hash)
 			pathList = append(pathList, p)
 		}
 	}
 	for _, nlri := range dels {
-		p := NewPath(peerInfo, nlri, true, []bgp.PathAttributeInterface{}, timestamp, false)
+		p := NewPath(peerInfo, nlri, true, []bgp.PathAttributeInterface{}, timestamp, true)
 		pathList = append(pathList, p)
 	}
 	return pathList
